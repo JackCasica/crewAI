@@ -356,7 +356,8 @@ class Crew(BaseModel):
     def _set_tasks_callbacks(self) -> str:
         """Sets callback for every task suing task_callback"""
         for task in self.tasks:
-            self.task_callback = task.callback
+            if task.callback is None:
+                self.task_callback = task.callback
 
     def _interpolate_inputs(self, inputs: Dict[str, Any]) -> str:
         """Interpolates the inputs in the tasks and agents."""
